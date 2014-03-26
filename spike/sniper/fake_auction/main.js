@@ -8,7 +8,8 @@ var amqp = require('amqplib');
 var ADMIN_EXCHANGE   = 'admin',
     AUCTION_EXCHANGE = 'auction',
     ADMIN_QUEUE      = 'admin',
-    COMMAND_QUEUE    = 'command';
+    COMMAND_QUEUE    = 'command',
+    EVENT_QUEUE      = 'event';
 
 (function () {
     'use strict';
@@ -52,10 +53,24 @@ var ADMIN_EXCHANGE   = 'admin',
                 })
             });
 
-            // Process one message at a time - is this what we want?
+            // Create event queue and bind it
             ok = ok.then(function() {
-                channel.prefetch(1);
+                return channel.assertQueue(EVENT_QUEUE, {
+                    autoDelete: false,
+                    noAck: true
+                });
             });
+
+            ok = ok.then(function(queueOk) {
+                return channel.bindQueue(queueOk.queue, AUCTION_EXCHANGE, '').then(function() {
+                    return queueOk.queue;
+                })
+            });
+
+            // Process one message at a time - is this what we want?
+//            ok = ok.then(function() {
+//                channel.prefetch(1);
+//            });
 
             ok = ok.then(function() {
                 channel.consume(ADMIN_QUEUE, doAdminWork, { noAck: true });
@@ -75,6 +90,10 @@ var ADMIN_EXCHANGE   = 'admin',
             function doCommandWork(msg) {
                 var body = msg.content.toString();
                 console.log(' [x] Received auction command "%s"', body);
+
+                var message = 'SOL Version: 1.1; Event: CLOSE';
+                channel.sendToQueue(EVENT_QUEUE, new Buffer(message));
+                console.log(' [x] Sent %s', message);
             }
         });
 
