@@ -1,0 +1,21 @@
+{
+  "name": "AuctionSniper",
+  "version": "0.0.0",
+  "description": "Fires new bids when no longer winning auction ",
+  "main": "Gruntfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Glen Pinner",
+  "license": "ISC",
+  "dependencies": {
+    "amqp": "^0.2.0",
+    "amqplib": "^0.1.3",
+    "express": "^3.5.1",
+    "node-uuid": "^1.4.1",
+    "when": "^3.0.0"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.4"
+  }
+}
