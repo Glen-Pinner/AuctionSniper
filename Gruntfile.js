@@ -148,6 +148,14 @@ module.exports = function(grunt) {
             Buffer: true,
             setTimeout: true,
             __dirname: true,
+            io: true,
+
+            // Broswer
+            $: true,
+            _: true,
+            Backbone: true,
+            Handlebars: true,
+
 
             // Debug
             console: true

@@ -12,12 +12,17 @@
     <div class="container">
         <h1>Auction Sniper</h1>
         <hr>
+        <div>
+            <p>Auction status: <span id="auction-status">Not available</span></p>
+            <button id="join-auction">Join</button>
+        </div>
+        <hr>
         <div id="contents"></div>
     </div>
 
     <!-- Handlebars templates -->
     <script type="text/x-handlebars-template" id="date-template">
-        <p>Server time delivered via Backbone: {{time}}</p>
+        <p>Time at auction house: {{time}}</p>
     </script>
 
     <script src="/socket.io/socket.io.js"></script>

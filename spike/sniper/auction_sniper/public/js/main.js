@@ -51,6 +51,11 @@
         model: date
     });
 
+    var AppRouter = Backbone.Router.extend({});
+
+    new AppRouter();
+    Backbone.history.start();
+
     // IO.socket stuff
     var socket = io.connect('http://localhost');
 
@@ -64,4 +69,16 @@
         vent.trigger('time_event', data);
     });
 
-})();
+    socket.on('join event', function(data) {
+        console.log('JOINED');
+        console.log('Auction status', data);
+        $('#auction-status').html(data.status);
+    });
+
+    // jQuery stuff
+    $('button#join-auction').on('click', function() {
+        console.log('User requested to join auction');
+        socket.emit('join request');
+    });
+
+ })();
