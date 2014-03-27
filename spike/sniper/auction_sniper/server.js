@@ -23,11 +23,27 @@
 
     // Start server
     var server = http.createServer(app);
+    var io = require('socket.io').listen(server);
 
     server.listen(app.get('port'), function() {
         console.log("Express app started on port " + app.get('port'));
 
         connectToFakeAuctionServer();
+    });
+
+    // Socket.IO Configuration
+    io.sockets.on('connection', function(socket) {
+        socket.emit('news', { hello: 'world'});
+
+        // start sending date to client
+        socket.on('my other event', function(data) {
+            console.log(data);
+
+            setInterval(function () {
+                console.log("Sending date to client...");
+                socket.emit('my time', { the_time: new Date() });
+            }, 1000);
+        });
     });
 
     function connectToFakeAuctionServer() {
