@@ -38,9 +38,11 @@ connection.on('ready', function() {
 });
 
 connection.on('error', function(ex) {
+    'use strict';
     throw ex;
 });
 
 connection.on('close', function(ex) {
+    'use strict';
     console.log('connection closed');
 });

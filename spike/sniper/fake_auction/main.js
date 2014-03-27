@@ -36,7 +36,7 @@ var ADMIN_EXCHANGE   = 'admin',
             ok = ok.then(function(queueOk) {
                 return channel.bindQueue(queueOk.queue, ADMIN_EXCHANGE, '').then(function() {
                     return queueOk.queue;
-                })
+                });
             });
 
             // Create command queue and bind it
@@ -50,7 +50,7 @@ var ADMIN_EXCHANGE   = 'admin',
             ok = ok.then(function(queueOk) {
                 return channel.bindQueue(queueOk.queue, AUCTION_EXCHANGE, '').then(function() {
                     return queueOk.queue;
-                })
+                });
             });
 
             // Create event queue and bind it
@@ -64,7 +64,7 @@ var ADMIN_EXCHANGE   = 'admin',
             ok = ok.then(function(queueOk) {
                 return channel.bindQueue(queueOk.queue, AUCTION_EXCHANGE, '').then(function() {
                     return queueOk.queue;
-                })
+                });
             });
 
             // Process one message at a time - is this what we want?

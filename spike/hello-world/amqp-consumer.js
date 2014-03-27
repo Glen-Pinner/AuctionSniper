@@ -34,14 +34,17 @@ connection.on('ready', function() {
 });
 
 connection.on('ack', function(ex) {
+    'use strict';
     console.log('ACK: publish confirmed');
 });
 
 connection.on('error', function(ex) {
+    'use strict';
     throw ex;
 });
 
 connection.on('close', function(ex) {
+    'use strict';
     console.log('connection closed');
 });
 

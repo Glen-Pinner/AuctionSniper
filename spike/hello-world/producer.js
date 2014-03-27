@@ -3,6 +3,8 @@ var amqp = require('amqplib');
 var when = require('when');
 
 amqp.connect().then(function(connection) {
+    'use strict';
+
     return when(connection.createChannel().then(function(channel) {
         var queue = 'hello';
         var msg   = 'Hello, World!';

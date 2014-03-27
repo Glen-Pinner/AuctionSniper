@@ -3,6 +3,8 @@
 var amqp = require('amqplib');
 
 amqp.connect('amqp://guest:guest@localhost').then(function(connection) {
+    'use strict';
+
     process.once('SIGINT', function() { connection.close(); });
 
     return connection.createChannel().then(function(channel) {

@@ -9,6 +9,7 @@ var basename = require('path').basename,
 var n = 11;
 
 amqp.connect().then(function(connection) {
+    'use strict';
 
     return when(connection.createChannel().then(function(channel) {
         var answer = defer();

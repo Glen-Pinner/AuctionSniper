@@ -12,6 +12,8 @@ if (severities.length < 1) {
 }
 
 amqp.connect().then(function(connection) {
+    'use strict';
+
     process.once('SIGINT', function() {
         connection.close();
     });

@@ -5,24 +5,20 @@ module.exports = function(grunt) {
 
     // Project configuration
     grunt.initConfig({
-        
-        // Express server configured for test using CasperJS
-        express: {
-            producer: {
-                options: {
-                    script: 'Hello World/producer.js'
-                }
-            },
-            consumer: {
-                options: {
-                    script: 'Hello World/consumer.js'
+
+        // Lint source files
+        jshint: {
+            spike: {
+                options: spikeLintOptions(),
+                files: {
+                    src: "spike/**/*.js"
                 }
             }
         }
     });
   
     // Load plugins
-    grunt.loadNpmTasks('grunt-express-server');
+    grunt.loadNpmTasks("grunt-contrib-jshint");
 
     // Define tasks
     grunt.registerTask("default", ["producer", "consumer"]);
@@ -118,4 +114,47 @@ module.exports = function(grunt) {
             done();
         });
     });
+
+    // Helper functions
+    function globalLintOptions() {
+        return {
+            bitwise: true,
+            curly: false,
+            eqeqeq: true,
+            forin: true,
+            immed: true,
+            latedef: "nofunc",
+            newcap: true,
+            noarg: true,
+            noempty: true,
+            nonew: true,
+            regexp: true,
+            undef: true,
+            strict: true,
+            trailing: true
+         };
+    }
+
+    function spikeLintOptions() {
+        var options = globalLintOptions();
+
+        // for now
+        options.globals = {
+            // CommonJS
+            require: true,
+
+            // Node
+            process: true,
+            Buffer: true,
+            setTimeout: true,
+            __dirname: true,
+
+            // Debug
+            console: true
+        };
+
+        options.ignores = ["spike/sniper/auction_sniper/public/js/vendor/**/*.js"];
+
+        return options;
+    }
 };

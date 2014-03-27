@@ -15,6 +15,7 @@ var alert = (args.length > 0) ? args[0] : 'info';
 var message = args.slice(1).join(' ') || 'Hello, World!';
 
 amqp.connect('amqp://guest:guest@localhost').then(function(connection) {
+    'use strict';
 
     return when(connection.createChannel().then(function(channel) {
         var ok = channel.assertExchange(AMQP_EXCHANGE, 'topic', { autoDelete: false });
@@ -27,7 +28,7 @@ amqp.connect('amqp://guest:guest@localhost').then(function(connection) {
             console.log(' [x] Sent %s: %s', alert, message);
 
             return channel.close();
-        })
+        });
     })).ensure(function() { connection.close(); });
 
 }).then(null, console.warn);

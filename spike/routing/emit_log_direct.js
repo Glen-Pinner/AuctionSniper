@@ -8,6 +8,7 @@ var severity = (args.length > 0) ? args[0] : 'info';
 var message = args.slice(1).join(' ') || 'Hello, World!';
 
 amqp.connect().then(function(connection) {
+    'use strict';
 
     return when(connection.createChannel().then(function(channel) {
         var exchange = 'direct_logs';

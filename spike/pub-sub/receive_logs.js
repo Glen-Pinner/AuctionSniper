@@ -3,6 +3,8 @@
 var amqp = require('amqplib');
 
 amqp.connect().then(function(connection) {
+    'use strict';
+
     process.once('SIGINT', function() {
         connection.close();
     });

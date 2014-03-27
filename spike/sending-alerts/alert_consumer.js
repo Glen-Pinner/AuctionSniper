@@ -11,6 +11,7 @@ var AMQP_SERVER = 'localhost',
     AMQP_EXCHANGE = 'alerts';
 
 amqp.connect('amqp://guest:guest@localhost').then(function(connection) {
+    'use strict';
 
     return connection.createChannel().then(function(channel) {
         // set durable => false too?
@@ -44,7 +45,7 @@ amqp.connect('amqp://guest:guest@localhost').then(function(connection) {
         ok = ok.then(function(queueOk) {
             return channel.bindQueue(queueOk.queue, AMQP_EXCHANGE, 'critical.*').then(function() {
                 return queueOk.queue;
-            })
+            });
         });
 
         ok = ok.then(function() {

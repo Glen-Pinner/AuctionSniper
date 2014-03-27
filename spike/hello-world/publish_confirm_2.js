@@ -6,6 +6,7 @@ var amqp = require('amqplib');
 var when = require('when');
 
 amqp.connect().then(function(connection) {
+    'use strict';
 
     connection.createConfirmChannel().then(function(channel) {
         var queue = 'hello';
@@ -28,18 +29,3 @@ amqp.connect().then(function(connection) {
 //        console.log(' [x] Sent "%s"', msg);
     });
 }).then(null, console.warn);
-
-
-
-//var open = require('amqplib').connect();
-//open.then(function(c) {
-//    c.createConfirmChannel().then(function(ch) {
-//        ch.sendToQueue('hello', new Buffer('foobar'), {},
-//            function(err, ok) {
-//                if (err !== null)
-//                    console.warn('Message nacked!');
-//                else
-//                    console.log('Message acked');
-//            });
-//    });
-//});

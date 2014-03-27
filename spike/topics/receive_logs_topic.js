@@ -12,6 +12,8 @@ if (keys.length < 1) {
 }
 
 amqp.connect().then(function(connection) {
+    'use strict';
+
     process.once('SIGINT', function() { connection.close(); });
 
     return connection.createChannel().then(function(channel) {
