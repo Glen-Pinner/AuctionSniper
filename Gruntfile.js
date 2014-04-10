@@ -14,17 +14,90 @@ module.exports = function(grunt) {
                     src: "spike/**/*.js"
                 }
             }
+        },
+
+        express: {
+            auction: {
+                options: {
+                    script: 'spike/sniper/fake_auction/server.js',
+                    debug: false
+                }
+            },
+            sniper: {
+                options: {
+                    script: 'spike/sniper/auction_sniper/server.js',
+                    debug: false
+                }
+            }
+        },
+
+        casperjs: {
+            options: {
+                path: 'spike/casper'
+            },
+            files: [
+                'spike/test/acceptance_tests.js'
+            ]
         }
     });
   
     // Load plugins
     grunt.loadNpmTasks("grunt-contrib-jshint");
+    grunt.loadNpmTasks("grunt-express-server");
+    grunt.loadNpmTasks("grunt-casperjs");
 
     // Define tasks
     grunt.registerTask("default", ["producer", "consumer"]);
     grunt.registerTask("pub-sub", ["subscriber", "publisher"]);
     grunt.registerTask("rpc",     ["rpc-client", "rpc-server"]);
 
+    grunt.registerTask('smoking', ['express:auction', 'express:sniper', 'casperjs']);
+
+    grunt.registerTask("fake-server", "Run Fake Server", function() {
+        var done = this.async();
+
+        var options = {
+            cmd: 'node',
+            args: ['spike/sniper/fake_auction/server.js &']
+//            opts: { stdio: 'inherit' }
+        };
+
+        grunt.util.spawn(options, function(error, result, code) {
+            console.log('*** Exiting Fake Auction Server');
+            done();
+        });
+    });
+
+    grunt.registerTask("sniper", "Run Auction Sniper", function() {
+        var done = this.async();
+
+        var options = {
+            cmd: 'node',
+            args: ['spike/sniper/auction_sniper/server.js &']
+//            opts: { stdio: 'inherit' }
+        };
+
+        grunt.util.spawn(options, function(error, result, code) {
+            console.log('*** Exiting Auction Sniper');
+            done();
+        });
+    });
+
+    grunt.registerTask("smoke-test", "Run acceptance tests", function() {
+        var done = this.async();
+
+        var options = {
+            cmd: 'node',
+            args: ['spike/test/acceptance_tests.js'],
+            opts: { stdio: 'inherit' }
+        };
+
+        grunt.util.spawn(options, function(error, result, code) {
+            done();
+        });
+    });
+
+    // Sample tasks to run spike code
     grunt.registerTask("producer", "RabbitMQ Hello World producer", function() {
         var done = this.async();
         
@@ -150,12 +223,14 @@ module.exports = function(grunt) {
             __dirname: true,
             io: true,
 
-            // Broswer
+            // Browser
             $: true,
             _: true,
             Backbone: true,
             Handlebars: true,
 
+            // Test
+            casper: true,
 
             // Debug
             console: true

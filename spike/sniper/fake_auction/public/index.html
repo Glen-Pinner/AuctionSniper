@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Auction Sniper</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Auction House</h1>
+        <hr>
+        <div>
+            <p>Auction status: <span id="auction-status">Not available</span></p>
+            <button id="join-auction">Join</button>
+        </div>
+        <hr>
+        <div id="contents"></div>
+    </div>
+
+    <!-- Handlebars templates -->
+    <script type="text/x-handlebars-template" id="date-template">
+        <p>Time at auction house: {{time}}</p>
+    </script>
+
+    <script src="/socket.io/socket.io.js"></script>
+
+    <script src="js/vendor/jquery-2.1.0.js"></script>
+    <script src="js/vendor/underscore.js"></script>
+    <script src="js/vendor/backbone.js"></script>
+    <script src="js/vendor/handlebars-v1.3.0.js"></script>
+
+    <script src="js/vendor/bootstrap.js"></script>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

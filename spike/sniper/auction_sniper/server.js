@@ -29,7 +29,7 @@
 
     // Start server
     var server = http.createServer(app);
-    var io = require('socket.io').listen(server);
+    var io = require('socket.io').listen(server, { log: false });
 
     server.listen(app.get('port'), function() {
         console.log("Express app started on port " + app.get('port'));
@@ -41,7 +41,7 @@
 
         // start sending date to client
         socket.on('my other event', function(data) {
-            console.log(data);
+//            console.log(data);
 
             /* global setInterval */
             setInterval(function () {
