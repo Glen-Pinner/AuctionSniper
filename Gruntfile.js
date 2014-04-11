@@ -47,7 +47,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks("grunt-casperjs");
 
     // Define tasks
-    grunt.registerTask("default", ["producer", "consumer"]);
+    grunt.registerTask("default", ["jshint", "smoking"]);
 
     grunt.registerTask('smoking', ['express:auction', 'express:sniper', 'casperjs']);
 

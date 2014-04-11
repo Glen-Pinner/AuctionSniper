@@ -32,7 +32,7 @@
     var io = require('socket.io').listen(server, { log: false });
 
     server.listen(app.get('port'), function() {
-        console.log("Express app started on port " + app.get('port'));
+        console.log("Auction Sniper started on port " + app.get('port'));
     });
 
     // Socket.IO Configuration

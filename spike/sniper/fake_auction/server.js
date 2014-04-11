@@ -32,7 +32,7 @@
     var io = require('socket.io').listen(server, { log: false });
 
     server.listen(app.get('port'), function() {
-        console.log("Fake Auction Server app started on port " + app.get('port'));
+        console.log("Fake Auction Server started on port " + app.get('port'));
 
         connectToFakeAuctionServer(/*socket*/);
     });
@@ -130,12 +130,12 @@
 
                 ok = ok.then(function() {
                     channel.consume(ADMIN_QUEUE, doAdminWork, { noAck: true });
-                    console.log('Fake Auction Server: waiting for admin messages. To exit press CTRL-C');
+//                    console.log('Fake Auction Server: waiting for admin messages. To exit press CTRL-C');
                 });
 
                 return ok.then(function() {
                     channel.consume(COMMAND_QUEUE, doCommandWork, { noAck: true });
-                    console.log('Fake Auction Server: waiting for command messages. To exit press CTRL-C');
+//                    console.log('Fake Auction Server: waiting for command messages. To exit press CTRL-C');
                 });
 
                 function doAdminWork(msg) {
@@ -155,7 +155,7 @@
 
         }).then(null, console.warn);
 
-        console.log('Connected to RabbitMQ');
+//        console.log('Connected to RabbitMQ');
     }
 
 })();

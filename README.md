@@ -19,7 +19,7 @@ Current status:
 *   Building proof-of-concept using amqplib, auction sniper communicating with fake auction server
 
 Next tasks:
-*   Spike integration of RabbitMQ into CasperJS
+*   Start test-driving Iteration 0
 
 To do:
 *   Look into fixing browser refresh with Socket.IO

@@ -23,17 +23,7 @@
         auction.announceClosed(test);
         application.showsSniperHasLostAuction(test);
     });
-//    var auction = new FakeAuctionServer(casper, 'item-12345');
-//    var application = new ApplicationRunner(casper);
-
-//    auction.startSellingItem();
-//    application.startBiddingIn(auction);
-//    auction.hasReceivedJoinRequestFromSniper();
-//    auction.announceClosed();
-//    application.showsSniperHasLostAuction();
 
     casper.run();
-
-//    casper.exit();
 
 })();
