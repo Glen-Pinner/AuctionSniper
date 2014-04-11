@@ -14,7 +14,6 @@
         };
 
         FakeAuctionServer.prototype.startSellingItem = function(test) {
-//            console.log('FakeAuctionServer.startSellingItem:', item);
             casper.start(URL);
 
             casper.then(function() {
@@ -23,12 +22,20 @@
             });
         };
 
-        FakeAuctionServer.prototype.hasReceivedJoinRequestFromSniper = function() {
-            console.log('FakeAuctionServer.hasReceivedJoinRequestFromSniper');
+        FakeAuctionServer.prototype.hasReceivedJoinRequestFromSniper = function(test) {
+            casper.thenOpen(URL);
+
+            casper.then(function() {
+                test.assertVisible('.container h2', 'Secondary header is visible');
+                test.assertSelectorHasText('.container h2', 'Bidders');
+            });
         };
 
-        FakeAuctionServer.prototype.announceClosed = function() {
-            console.log('FakeAuctionServer.announceClosed');
+        FakeAuctionServer.prototype.announceClosed = function(test) {
+            casper.then(function() {
+                test.assertVisible('.container .lots', 'Lot is visible');
+                test.assertSelectorHasText('.container .lots p', '12345');
+            });
         };
     };
 

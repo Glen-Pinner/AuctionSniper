@@ -3,20 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Auction Sniper</title>
+    <title>Southabee's</title>
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/main.css">
 </head>
 
 <body>
     <div class="container">
-        <h1>Auction House</h1>
+        <h1>Southabee's Auction House</h1>
         <hr>
-        <div>
-            <p>Auction status: <span id="auction-status">Not available</span></p>
-            <button id="join-auction">Join</button>
+        <div class="lots row">
+            <div class="col-xs-6 col-sm-8">
+                <p>Lot: 12345</p>
+            </div>
+            <div class="col-xs-3 col-sm-2">
+                <button id="open-auction">Open</button>
+            </div>
+            <div class="col-xs-3 col-sm-2">
+                <button id="close-auction">Close</button>
+            </div>
         </div>
         <hr>
+        <h2>Bidders</h2>
         <div id="contents"></div>
     </div>
 
